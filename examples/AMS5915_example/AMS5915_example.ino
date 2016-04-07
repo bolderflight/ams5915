@@ -1,0 +1,62 @@
+//
+// title:     AMS5915_example.ino
+// author:    Taylor, Brian R.
+// email:     brian.taylor@bolderflight.com
+// date:      2016-04-07 
+// license: 
+//
+
+#include "AMS5915.h"
+#include <i2c_t3.h> // I2C library
+
+// an AMS5915 object, which is a
+// static pressure sensure at I2C
+// address of 0x10, on the Teensy
+// LC I2C bus 1 (pins 22 and 23)
+// and is a AMS5915-0020-D
+AMS5915 staticPress(0x10,1,"teensyLC","AMS5915-0020-D");
+
+void setup() {
+  // serial to display data
+  Serial.begin(9600);
+
+  // starting communication with the 
+  // static pressure transducer
+  staticPress.begin();
+}
+
+void loop() {
+  double pressure, temperature;
+  uint16_t pressureCounts, temperatureCounts;
+
+  // getting both the temperature (C) and pressure (PA)
+  staticPress.getData(&pressure,&temperature);
+
+  // displaying the data
+  Serial.print(pressure,6);
+  Serial.print("\t");
+  Serial.println(temperature,6);
+  delay(100);
+
+  // getting just the pressure, PA
+  pressure = staticPress.getPressure();
+  delay(10);
+
+  // getting just the temperature, C
+  temperature = staticPress.getTemperature();
+  delay(10);
+
+  // displaying the data
+  Serial.print(pressure,6);
+  Serial.print("\t");
+  Serial.println(temperature,6);
+  delay(100);
+
+  // getting the raw counts
+  staticPress.readBytes(&pressureCounts, &temperatureCounts);
+  Serial.print(pressureCounts);
+  Serial.print("\t");
+  Serial.println(temperatureCounts);
+  delay(100);
+}
+
