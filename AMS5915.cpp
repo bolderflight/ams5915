@@ -2,7 +2,7 @@
 AMS5915.cpp
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-04-07
+2016-08-11
 
 Copyright (c) 2016 Bolder Flight Systems
 
@@ -234,7 +234,7 @@ double AMS5915::getPressure(){
   pressureCounts = readPressureBytes();
 
   // convert counts to pressure, PA
-  pressure = ((pressureCounts - digOutPmin)/((digOutPmax - digOutPmin)/(_pMax - _pMin)) + _pMin) * mBar2Pa;
+  pressure = ((pressureCounts - digOutPmin)/((digOutPmax - digOutPmin)/(_pMax - _pMin)) + _pMin) * _mBar2Pa;
 
   return pressure;
 }
@@ -265,7 +265,7 @@ void AMS5915::getData(double* pressure, double* temperature){
   readBytes(&pressureCounts, &temperatureCounts);
 
   // convert counts to pressure, PA
-  *pressure = ((pressureCounts - digOutPmin)/((digOutPmax - digOutPmin)/(_pMax - _pMin)) + _pMin) * mBar2Pa;
+  *pressure = ((pressureCounts - digOutPmin)/((digOutPmax - digOutPmin)/(_pMax - _pMin)) + _pMin) * _mBar2Pa;
 
   // convert counts to temperature, C
   *temperature = (temperatureCounts * 200.0)/2048.0 - 50.0;

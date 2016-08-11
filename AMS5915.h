@@ -2,7 +2,7 @@
 AMS5915.h
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-04-07
+2016-08-11
 
 Copyright (c) 2016 Bolder Flight Systems
 
@@ -73,9 +73,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #define AMS5915_1200_B_P_MIN 700.0
 #define AMS5915_1200_B_P_MAX 1200.0
 
-// conversion millibar to PA
-#define mBar2Pa 100.0
-
 class AMS5915{
   public:
     AMS5915(int address, int bus, String chip, String type);
@@ -92,6 +89,7 @@ class AMS5915{
     double _pMax;
     double _tMin;
     double _tMax;
+    const double _mBar2Pa = 100.0; // conversion millibar to PA
     void getTransducer();
     uint16_t readPressureBytes();
     void readBytes(uint16_t* pressureCounts, uint16_t* temperatureCounts);
