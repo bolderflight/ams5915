@@ -2,7 +2,7 @@
 AMS5915_example.ino
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-04-07
+2016-08-11
 
 Copyright (c) 2016 Bolder Flight Systems
 
@@ -23,14 +23,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 */
 
 #include "AMS5915.h"
-#include <i2c_t3.h> // I2C library
 
 // an AMS5915 object, which is a
 // static pressure sensure at I2C
 // address of 0x10, on the Teensy
-// LC I2C bus 1 (pins 22 and 23)
-// and is a AMS5915-0020-D
-AMS5915 staticPress(0x10,1,"teensyLC","AMS5915-0020-D");
+// LC I2C bus 0 (pins 18 and 19)
+// and is a AMS5915-1200-B
+AMS5915 sPress(0x10,0,"teensyLC","AMS5915-1200-B");
 
 void setup() {
   // serial to display data
@@ -38,15 +37,14 @@ void setup() {
 
   // starting communication with the 
   // static pressure transducer
-  staticPress.begin();
+  sPress.begin();
 }
 
 void loop() {
   double pressure, temperature;
-  uint16_t pressureCounts, temperatureCounts;
 
   // getting both the temperature (C) and pressure (PA)
-  staticPress.getData(&pressure,&temperature);
+  sPress.getData(&pressure,&temperature);
 
   // displaying the data
   Serial.print(pressure,6);
@@ -55,24 +53,17 @@ void loop() {
   delay(100);
 
   // getting just the pressure, PA
-  pressure = staticPress.getPressure();
+  pressure = sPress.getPressure();
   delay(10);
 
   // getting just the temperature, C
-  temperature = staticPress.getTemperature();
+  temperature = sPress.getTemperature();
   delay(10);
 
   // displaying the data
   Serial.print(pressure,6);
   Serial.print("\t");
   Serial.println(temperature,6);
-  delay(100);
-
-  // getting the raw counts
-  staticPress.readBytes(&pressureCounts, &temperatureCounts);
-  Serial.print(pressureCounts);
-  Serial.print("\t");
-  Serial.println(temperatureCounts);
   delay(100);
 }
 
