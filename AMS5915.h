@@ -2,7 +2,7 @@
 AMS5915.h
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-08-11
+2016-08-16
 
 Copyright (c) 2016 Bolder Flight Systems
 
@@ -75,7 +75,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 class AMS5915{
   public:
-    AMS5915(int address, int bus, String chip, String type);
+    AMS5915(int address, int bus, String type);
     void begin();
     double getPressure();
     double getTemperature();
@@ -83,7 +83,6 @@ class AMS5915{
   private:
     int _address;
     int _bus;
-    String _chip;
     String _type;
     double _pMin;
     double _pMax;

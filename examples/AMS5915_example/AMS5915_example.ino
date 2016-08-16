@@ -2,7 +2,7 @@
 AMS5915_example.ino
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-08-11
+2016-08-16
 
 Copyright (c) 2016 Bolder Flight Systems
 
@@ -26,10 +26,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 // an AMS5915 object, which is a
 // static pressure sensure at I2C
-// address of 0x10, on the Teensy
-// LC I2C bus 0 (pins 18 and 19)
+// address of 0x10, on I2C bus 0,
 // and is a AMS5915-1200-B
-AMS5915 sPress(0x10,0,"teensyLC","AMS5915-1200-B");
+AMS5915 sPress(0x10,0,"AMS5915-1200-B");
 
 void setup() {
   // serial to display data

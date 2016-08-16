@@ -2,7 +2,7 @@
 AMS5915.cpp
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-08-11
+2016-08-16
 
 Copyright (c) 2016 Bolder Flight Systems
 
@@ -22,31 +22,37 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+// Teensy 3.1/3.2 || Teensy LC 
+#if defined(__MK20DX256__) || defined(__MKL26Z64__)
+
 #include "Arduino.h"
 #include "AMS5915.h"
 #include <i2c_t3.h>  // I2C library
 
 /* AMS5812 object, input the I2C address and chip name (i.e. "AMS5812-0150-B") */
-AMS5915::AMS5915(int address, int bus, String chip, String type){
+AMS5915::AMS5915(int address, int bus, String type){
   _address = address; // I2C address
   _bus = bus; // I2C bus
-  _chip = chip;  // string, teensy3.X vs teensyLC
   _type = type; // string, transducer type
 }
 
 /* starts the I2C communication and sets the pressure and temperature ranges using getTransducer */
 void AMS5915::begin(){
 
-  // starting the I2C
-  if((_bus == 1)&&(_chip.equals("teensyLC"))) {
-    Wire1.begin(I2C_MASTER, 0, I2C_PINS_22_23, I2C_PULLUP_EXT, I2C_RATE_400);
-  }
-  else if(_bus == 1) {
-  	Wire1.begin(I2C_MASTER, 0, I2C_PINS_29_30, I2C_PULLUP_EXT, I2C_RATE_400);
-  }
-  else{
-    Wire.begin(I2C_MASTER, 0, I2C_PINS_18_19, I2C_PULLUP_EXT, I2C_RATE_400);
-  }
+  	// starting the I2C
+  	if (_bus == 1) {
+
+    	#if defined(__MKL26Z64__) // Teensy LC
+  			Wire1.begin(I2C_MASTER, 0, I2C_PINS_22_23, I2C_PULLUP_EXT, I2C_RATE_400);
+    	#endif
+
+    	#if defined(__MK20DX256__) // Teensy 3.1/3.2
+  			Wire1.begin(I2C_MASTER, 0, I2C_PINS_29_30, I2C_PULLUP_EXT, I2C_RATE_400);
+    	#endif
+  	}
+  	else{
+  		Wire.begin(I2C_MASTER, 0, I2C_PINS_18_19, I2C_PULLUP_EXT, I2C_RATE_400);
+  	}
 
   // setting the min and max pressure and temperature based on the chip
   getTransducer();
@@ -270,3 +276,5 @@ void AMS5915::getData(double* pressure, double* temperature){
   // convert counts to temperature, C
   *temperature = (temperatureCounts * 200.0)/2048.0 - 50.0;
 }
+
+#endif
