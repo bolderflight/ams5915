@@ -30,7 +30,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #include <i2c_t3.h>  // I2C library
 
 /* AMS5812 object, input the I2C address and chip name (i.e. "AMS5812-0150-B") */
-AMS5915::AMS5915(int address, int bus, String type){
+AMS5915::AMS5915(uint8_t address, uint8_t bus, String type){
   _address = address; // I2C address
   _bus = bus; // I2C bus
   _type = type; // string, transducer type
@@ -60,11 +60,12 @@ void AMS5915::begin(){
 
 /* reads pressure and temperature and returns values in counts */
 void AMS5915::readBytes(uint16_t* pressureCounts, uint16_t* temperatureCounts){
-  byte b[4]; // buffer
+  uint8_t b[4]; // buffer
+  const uint8_t numBytes;
 
   if(_bus == 1){
   	// 4 bytes from address
-    Wire1.requestFrom(_address,4); 
+    Wire1.requestFrom(_address, numBytes); 
   
     // put the data in buffer
     b[0] = Wire1.read(); 
@@ -74,7 +75,7 @@ void AMS5915::readBytes(uint16_t* pressureCounts, uint16_t* temperatureCounts){
   }
   else{
     // 4 bytes from address
-    Wire.requestFrom(_address,4); 
+    Wire.requestFrom(_address, numBytes); 
   
     // put the data in buffer
     b[0] = Wire.read(); 
@@ -90,11 +91,12 @@ void AMS5915::readBytes(uint16_t* pressureCounts, uint16_t* temperatureCounts){
 
 /* reads pressure and returns values in counts */
 uint16_t AMS5915::readPressureBytes(){
-  byte b[2]; // buffer
+  uint8_t b[2]; // buffer
+  const uint8_t numBytes;
 
   if(_bus == 1){
     // 2 bytes from address
-    Wire1.requestFrom(_address,4); 
+    Wire1.requestFrom(_address, numBytes); 
   
     // put the data in buffer
     b[0] = Wire1.read(); 
@@ -102,7 +104,7 @@ uint16_t AMS5915::readPressureBytes(){
   }
   else{
     // 2 bytes from address
-    Wire.requestFrom(_address,4); 
+    Wire.requestFrom(_address, numBytes); 
   
     // put the data in buffer
     b[0] = Wire.read(); 

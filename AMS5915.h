@@ -29,14 +29,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 class AMS5915{
   public:
-    AMS5915(int address, int bus, String type);
+    AMS5915(uint8_t address, uint8_t bus, String type);
     void begin();
     float getPressure();
     float getTemperature();
     void getData(float* pressure, float* temperature);
   private:
-    int _address;
-    int _bus;
+    uint8_t _address;
+    uint8_t _bus;
     String _type;
     float _pMin;
     float _pMax;
