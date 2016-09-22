@@ -61,7 +61,7 @@ void AMS5915::begin(){
 /* reads pressure and temperature and returns values in counts */
 void AMS5915::readBytes(uint16_t* pressureCounts, uint16_t* temperatureCounts){
   uint8_t b[4]; // buffer
-  const uint8_t numBytes;
+  const uint8_t numBytes = 4;
 
   if(_bus == 1){
   	// 4 bytes from address
@@ -92,7 +92,7 @@ void AMS5915::readBytes(uint16_t* pressureCounts, uint16_t* temperatureCounts){
 /* reads pressure and returns values in counts */
 uint16_t AMS5915::readPressureBytes(){
   uint8_t b[2]; // buffer
-  const uint8_t numBytes;
+  const uint8_t numBytes = 4;
 
   if(_bus == 1){
     // 2 bytes from address
