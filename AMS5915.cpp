@@ -255,7 +255,7 @@ float AMS5915::getTemperature(){
   readBytes(&pressureCounts, &temperatureCounts);
 
   // convert counts to temperature, C
-  temperature = (temperatureCounts * 200.0)/2048.0 - 50.0;
+  temperature = (temperatureCounts * 200.0f)/2048.0f - 50.0f;
 
   return temperature;
 }

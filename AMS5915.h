@@ -27,52 +27,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 #include "Arduino.h"
 
-// min and max pressures, millibar
-#define AMS5915_0005_D_P_MIN 0.0
-#define AMS5915_0005_D_P_MAX 5.0
-#define AMS5915_0010_D_P_MIN 0.0
-#define AMS5915_0010_D_P_MAX 10.0
-#define AMS5915_0005_D_B_P_MIN -5.0
-#define AMS5915_0005_D_B_P_MAX 5.0
-#define AMS5915_0010_D_B_P_MIN -10.0
-#define AMS5915_0010_D_B_P_MAX 10.0
-#define AMS5915_0020_D_P_MIN 0.0
-#define AMS5915_0020_D_P_MAX 20.0
-#define AMS5915_0050_D_P_MIN 0.0
-#define AMS5915_0050_D_P_MAX 50.0
-#define AMS5915_0100_D_P_MIN 0.0
-#define AMS5915_0100_D_P_MAX 100.0
-#define AMS5915_0020_D_B_P_MIN -20.0
-#define AMS5915_0020_D_B_P_MAX 20.0
-#define AMS5915_0050_D_B_P_MIN -50.0
-#define AMS5915_0050_D_B_P_MAX 50.0
-#define AMS5915_0100_D_B_P_MIN -100.0
-#define AMS5915_0100_D_B_P_MAX 100.0
-#define AMS5915_0200_D_P_MIN 0.0
-#define AMS5915_0200_D_P_MAX 200.0
-#define AMS5915_0350_D_P_MIN 0.0
-#define AMS5915_0350_D_P_MAX 350.0
-#define AMS5915_1000_D_P_MIN 0.0
-#define AMS5915_1000_D_P_MAX 1000.0
-#define AMS5915_2000_D_P_MIN 0.0
-#define AMS5915_2000_D_P_MAX 2000.0
-#define AMS5915_4000_D_P_MIN 0.0
-#define AMS5915_4000_D_P_MAX 4000.0
-#define AMS5915_7000_D_P_MIN 0.0
-#define AMS5915_7000_D_P_MAX 7000.0
-#define AMS5915_10000_D_P_MIN 0.0
-#define AMS5915_10000_D_P_MAX 10000.0
-#define AMS5915_0200_D_B_P_MIN -200.0
-#define AMS5915_0200_D_B_P_MAX 200.0
-#define AMS5915_0350_D_B_P_MIN -350.0
-#define AMS5915_0350_D_B_P_MAX 350.0
-#define AMS5915_1000_D_B_P_MIN -1000.0
-#define AMS5915_1000_D_B_P_MAX 1000.0
-#define AMS5915_1000_A_P_MIN 0.0
-#define AMS5915_1000_A_P_MAX 1000.0
-#define AMS5915_1200_B_P_MIN 700.0
-#define AMS5915_1200_B_P_MAX 1200.0
-
 class AMS5915{
   public:
     AMS5915(int address, int bus, String type);
@@ -88,7 +42,56 @@ class AMS5915{
     float _pMax;
     float _tMin;
     float _tMax;
-    const float _mBar2Pa = 100.0f; // conversion millibar to PA
+
+    // conversion millibar to PA
+    const float _mBar2Pa = 100.0f; 
+
+	// min and max pressures, millibar
+	const float AMS5915_0005_D_P_MIN = 0.0f;
+	const float AMS5915_0005_D_P_MAX = 5.0f;
+	const float AMS5915_0010_D_P_MIN = 0.0f;
+	const float AMS5915_0010_D_P_MAX = 10.0f;
+	const float AMS5915_0005_D_B_P_MIN = -5.0f;
+	const float AMS5915_0005_D_B_P_MAX = 5.0f;
+	const float AMS5915_0010_D_B_P_MIN = -10.0f;
+	const float AMS5915_0010_D_B_P_MAX = 10.0f;
+	const float AMS5915_0020_D_P_MIN = 0.0f;
+	const float AMS5915_0020_D_P_MAX = 20.0f;
+	const float AMS5915_0050_D_P_MIN = 0.0f;
+	const float AMS5915_0050_D_P_MAX = 50.0f;
+	const float AMS5915_0100_D_P_MIN = 0.0f;
+	const float AMS5915_0100_D_P_MAX = 100.0f;
+	const float AMS5915_0020_D_B_P_MIN = -20.0f;
+	const float AMS5915_0020_D_B_P_MAX = 20.0f;
+	const float AMS5915_0050_D_B_P_MIN = -50.0f;
+	const float AMS5915_0050_D_B_P_MAX = 50.0f;
+	const float AMS5915_0100_D_B_P_MIN = -100.0f;
+	const float AMS5915_0100_D_B_P_MAX = 100.0f;
+	const float AMS5915_0200_D_P_MIN = 0.0f;
+	const float AMS5915_0200_D_P_MAX = 200.0f;
+	const float AMS5915_0350_D_P_MIN = 0.0f;
+	const float AMS5915_0350_D_P_MAX = 350.0f;
+	const float AMS5915_1000_D_P_MIN = 0.0f;
+	const float AMS5915_1000_D_P_MAX = 1000.0f;
+	const float AMS5915_2000_D_P_MIN = 0.0f;
+	const float AMS5915_2000_D_P_MAX = 2000.0f;
+	const float AMS5915_4000_D_P_MIN = 0.0f;
+	const float AMS5915_4000_D_P_MAX = 4000.0f;
+	const float AMS5915_7000_D_P_MIN = 0.0f;
+	const float AMS5915_7000_D_P_MAX = 7000.0f;
+	const float AMS5915_10000_D_P_MIN = 0.0f;
+	const float AMS5915_10000_D_P_MAX = 10000.0f;
+	const float AMS5915_0200_D_B_P_MIN = -200.0f;
+	const float AMS5915_0200_D_B_P_MAX = 200.0f;
+	const float AMS5915_0350_D_B_P_MIN = -350.0f;
+	const float AMS5915_0350_D_B_P_MAX = 350.0f;
+	const float AMS5915_1000_D_B_P_MIN = -1000.0f;
+	const float AMS5915_1000_D_B_P_MAX = 1000.0f;
+	const float AMS5915_1000_A_P_MIN = 0.0f;
+	const float AMS5915_1000_A_P_MAX = 1000.0f;
+	const float AMS5915_1200_B_P_MIN = 700.0f;
+	const float AMS5915_1200_B_P_MAX = 1200.0f;
+
     void getTransducer();
     uint16_t readPressureBytes();
     void readBytes(uint16_t* pressureCounts, uint16_t* temperatureCounts);
