@@ -2,7 +2,7 @@
 AMS5915_example.ino
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-08-16
+2016-09-22
 
 Copyright (c) 2016 Bolder Flight Systems
 

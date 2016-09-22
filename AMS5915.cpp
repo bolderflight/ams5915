@@ -2,7 +2,7 @@
 AMS5915.cpp
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-08-16
+2016-09-22
 
 Copyright (c) 2016 Bolder Flight Systems
 
@@ -276,7 +276,7 @@ void AMS5915::getData(float* pressure, float* temperature){
   *pressure = ((pressureCounts - digOutPmin)/((digOutPmax - digOutPmin)/(_pMax - _pMin)) + _pMin) * _mBar2Pa;
 
   // convert counts to temperature, C
-  *temperature = (temperatureCounts * 200.0)/2048.0 - 50.0;
+  *temperature = (temperatureCounts * 200.0f)/2048.0f - 50.0f;
 }
 
 #endif
