@@ -40,7 +40,7 @@ void setup() {
 }
 
 void loop() {
-  double pressure, temperature;
+  float pressure, temperature;
 
   // getting both the temperature (C) and pressure (PA)
   sPress.getData(&pressure,&temperature);

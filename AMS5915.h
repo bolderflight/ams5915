@@ -77,18 +77,18 @@ class AMS5915{
   public:
     AMS5915(int address, int bus, String type);
     void begin();
-    double getPressure();
-    double getTemperature();
-    void getData(double* pressure, double* temperature);
+    float getPressure();
+    float getTemperature();
+    void getData(float* pressure, float* temperature);
   private:
     int _address;
     int _bus;
     String _type;
-    double _pMin;
-    double _pMax;
-    double _tMin;
-    double _tMax;
-    const double _mBar2Pa = 100.0; // conversion millibar to PA
+    float _pMin;
+    float _pMax;
+    float _tMin;
+    float _tMax;
+    const float _mBar2Pa = 100.0f; // conversion millibar to PA
     void getTransducer();
     uint16_t readPressureBytes();
     void readBytes(uint16_t* pressureCounts, uint16_t* temperatureCounts);

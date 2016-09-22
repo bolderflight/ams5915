@@ -230,10 +230,10 @@ void AMS5915::getTransducer(){
 }
 
 /* gets only the pressure value, PA */
-double AMS5915::getPressure(){
+float AMS5915::getPressure(){
   uint16_t digOutPmin = 1638;   // digital output at minimum pressure
   uint16_t digOutPmax = 14745;  // digital output at maximum pressure
-  double pressure;  // pressure, pa
+  float pressure;  // pressure, pa
   uint16_t pressureCounts; // pressure digital output, counts
 
   // get pressure off transducer
@@ -246,8 +246,8 @@ double AMS5915::getPressure(){
 }
 
 /* gets only the temperature value, C */
-double AMS5915::getTemperature(){
-  double temperature;  // temperature, C
+float AMS5915::getTemperature(){
+  float temperature;  // temperature, C
   uint16_t pressureCounts; // pressure digital output, counts
   uint16_t temperatureCounts; // temperature digital output, counts
 
@@ -261,7 +261,7 @@ double AMS5915::getTemperature(){
 }
 
 /* gets both the pressure (PA) and temperature (C) values */
-void AMS5915::getData(double* pressure, double* temperature){
+void AMS5915::getData(float* pressure, float* temperature){
   uint16_t digOutPmin = 1638;   // digital output at minimum pressure
   uint16_t digOutPmax = 14745;  // digital output at maximum pressure
   uint16_t pressureCounts; // pressure digital output, counts

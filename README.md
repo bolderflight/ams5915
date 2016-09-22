@@ -25,27 +25,27 @@ This should be called in your setup function. It initializes the I2C communicati
 sPress.begin();
 ```
 
-**double getPressure()**
-*getPressure()* samples the AMS 5915 sensor and returns the pressure measurement as a double with units of Pascal (Pa).
+**float getPressure()**
+*getPressure()* samples the AMS 5915 sensor and returns the pressure measurement as a float with units of Pascal (Pa).
 
 ```C++
-double pressure;
+float pressure;
 pressure = sPress.getPressure();
 ```
 
-**double getTemperature()**
-*getTemperature()* samples the AMS 5915 sensor and returns the temperature measurement as a double with units of Celsius (C).
+**float getTemperature()**
+*getTemperature()* samples the AMS 5915 sensor and returns the temperature measurement as a float with units of Celsius (C).
 
 ```C++
-double temperature;
+float temperature;
 temperature = sPress.getTemperature();
 ```
 
-**void getData(double* pressure, double* temperature)**
-*getData(double&ast; pressure, double&ast; temperature)* samples the AMS 5915 sensor and returns the pressure measurement as a double with units of Pascal (Pa) and temperature measurement as a double with units of Celsius (C).
+**void getData(float* pressure, float* temperature)**
+*getData(float&ast; pressure, float&ast; temperature)* samples the AMS 5915 sensor and returns the pressure measurement as a float with units of Pascal (Pa) and temperature measurement as a float with units of Celsius (C).
 
 ```C++
-double pressure, temperature;
+float pressure, temperature;
 sPress.getData(&pressure,&temperature);
 ```
 
