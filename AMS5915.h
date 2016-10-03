@@ -2,7 +2,7 @@
 AMS5915.h
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-09-22
+2016-10-03
 
 Copyright (c) 2016 Bolder Flight Systems
 
@@ -42,6 +42,9 @@ class AMS5915{
     float _pMax;
     float _tMin;
     float _tMax;
+
+    // i2c bus frequency
+    const uint32_t _i2cRate = 400000;
 
     // conversion millibar to PA
     const float _mBar2Pa = 100.0f; 
