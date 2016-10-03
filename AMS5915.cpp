@@ -22,8 +22,9 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-// Teensy 3.0 || Teensy 3.1/3.2 || Teensy LC 
-#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MKL26Z64__)
+// Teensy 3.0 || Teensy 3.1/3.2 || Teensy 3.5 || Teensy 3.6 || Teensy LC 
+#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || \
+	defined(__MK66FX1M0__) || defined(__MKL26Z64__)
 
 #include "Arduino.h"
 #include "AMS5915.h"
@@ -49,6 +50,37 @@ i2c_pins pins;
 	#if defined(__MK20DX256__) // Teensy 3.1/3.2
 		if(_bus == 1) {
 			pins = I2C_PINS_29_30;
+		}
+		else{
+			pins = I2C_PINS_18_19;
+			_bus = 0;
+		}
+
+	#endif
+
+	#if defined(__MK64FX512__) // Teensy 3.5
+		if(_bus == 2) {
+			pins = I2C_PINS_3_4;
+		}
+		else if(_bus == 1) {
+			pins = I2C_PINS_37_38;
+		}
+		else{
+			pins = I2C_PINS_18_19;
+			_bus = 0;
+		}
+
+	#endif
+
+	#if defined(__MK66FX1M0__) // Teensy 3.6
+		if(_bus == 3) {
+			pins = I2C_PINS_56_57;
+		}
+		else if(_bus == 2) {
+			pins = I2C_PINS_3_4;
+		}
+		else if(_bus == 1) {
+			pins = I2C_PINS_37_38;
 		}
 		else{
 			pins = I2C_PINS_18_19;
