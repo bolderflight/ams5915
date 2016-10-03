@@ -100,7 +100,7 @@ i2c_pins pins;
 
 	#endif
 
-	// starting the I2C bus
+    // starting the I2C bus
   	i2c_t3(_bus).begin(I2C_MASTER, 0, pins, I2C_PULLUP_EXT, _i2cRate);
 
   	// setting the min and max pressure and temperature based on the chip

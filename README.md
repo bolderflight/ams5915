@@ -1,5 +1,5 @@
 # AMS5915
-Library for communicating with [AMSYS AMS 5915](http://www.amsys.info/products/ams5915.htm) pressure transducers using Teensy 3.0, 3.1/3.2, 3.5, 3.6, and Teensy LC devices.
+Library for communicating with [AMSYS AMS 5915](http://www.amsys.info/products/ams5915.htm) pressure transducers using Teensy 3.x and Teensy LC devices.
 
 # Description
 The AMSYS AMS 5915 pressure transducers are fully signal conditioned, amplified, and temperature compensated over a temperature range of -25 to +85 C. These sensors generate data with high precision, high stability and low drift. Digital measurements are sampled with a 14 bit resolution. The AMSYS AMS 5915 sensors are available in a wide variety of pressure ranges and in configurations suited for barometric, differential, and bidirectional differential measurement.
