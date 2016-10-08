@@ -50,7 +50,7 @@ sPress.getData(&pressure,&temperature);
 ```
 
 # Wiring and Pullups
-Please refer to the [AMSYS AMS 5915 datasheet](http://www.analogmicro.de/_pages/sens/ams5915/ams5915_data_sheet.pdf) and the [Teensy pinout diagrams](https://www.pjrc.com/teensy/pinout.html).
+Please refer to the [AMSYS AMS 5915 datasheet](https://github.com/bolderflight/AMS5915/blob/master/docs/ams5915.pdf) and the [Teensy pinout diagrams](https://www.pjrc.com/teensy/pinout.html).
 
 The silver dot on the AMSYS AMS 5915 marks the location of Pin 1. The AMS 5915 pinout is:
 
