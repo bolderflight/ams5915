@@ -2,7 +2,7 @@
 AMS5915.h
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-10-03
+2016-11-03
 
 Copyright (c) 2016 Bolder Flight Systems
 
@@ -27,9 +27,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 #include "Arduino.h"
 
+enum ams5915_transducer
+{
+    AMS5915_0005_D,
+    AMS5915_0010_D,
+    AMS5915_0005_D_B,
+    AMS5915_0010_D_B,
+    AMS5915_0020_D,
+    AMS5915_0050_D,
+    AMS5915_0100_D,
+    AMS5915_0020_D_B,
+    AMS5915_0050_D_B,
+    AMS5915_0100_D_B,
+    AMS5915_0200_D,
+    AMS5915_0350_D,
+    AMS5915_1000_D,
+    AMS5915_2000_D,
+    AMS5915_4000_D,
+    AMS5915_7000_D,
+    AMS5915_10000_D,
+    AMS5915_0200_D_B,
+    AMS5915_0350_D_B,
+    AMS5915_1000_D_B,
+    AMS5915_1000_A,
+    AMS5915_1200_B
+};
+
 class AMS5915{
   public:
-    AMS5915(uint8_t address, uint8_t bus, String type);
+    AMS5915(uint8_t address, uint8_t bus, ams5915_transducer type);
     void begin();
     float getPressure();
     float getTemperature();
@@ -37,7 +63,7 @@ class AMS5915{
   private:
     uint8_t _address;
     uint8_t _bus;
-    String _type;
+    ams5915_transducer _type;
     float _pMin;
     float _pMax;
     float _tMin;

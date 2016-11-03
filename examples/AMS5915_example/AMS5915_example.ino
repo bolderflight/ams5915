@@ -2,7 +2,7 @@
 AMS5915_example.ino
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-09-22
+2016-11-03
 
 Copyright (c) 2016 Bolder Flight Systems
 
@@ -28,7 +28,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 // static pressure sensure at I2C
 // address of 0x10, on I2C bus 0,
 // and is a AMS5915-1200-B
-AMS5915 sPress(0x10,0,"AMS5915-1200-B");
+AMS5915 sPress(0x10,0, AMS5915_1200_B);
 
 void setup() {
   // serial to display data

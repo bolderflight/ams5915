@@ -9,13 +9,40 @@ This library communicates with the AMS 5915 sensors using an I2C interface. The 
 # Usage
 This library uses the [i2c_t3 enhanced I2C library](https://github.com/nox771/i2c_t3) for Teensy 3.x/LC devices.
 
-Simply clone or download and extract the zipped library into your Arduino/libraries folder.
+Simply clone or download and extract the zipped library into your Arduino/libraries folder. The [i2c_t3 enhanced I2C library](https://github.com/nox771/i2c_t3) is bundled with the [Teensyduino software](http://pjrc.com/teensy/td_download.html) and is not required to download separately.
 
-**AMS5915(uint8_t address, uint8_t bus, String type)**
-An AMS5915 object should be declared, specifying the AMS 5915 I2C address, the I2C bus, and the AMS 5915 sensor type. For example, the following code declares an AMS5915 object called *sPress* with an AMS5915-1200-B sensor located on I2C bus 0 with an I2C address of 0x10:
+**AMS5915(uint8_t address, uint8_t bus, ams5915_transducer type)**
+An AMS5915 object should be declared, specifying the AMS 5915 I2C address, the I2C bus, and the AMS 5915 sensor type. The enumerated transducer types are:
+
+| Sensor Name       | Enumerated Type  | Pressure Type              | Pressure Range       |
+| -----------       | ---------------  | ---------------            | ---------------      |
+| AMS 5915-0005-D   | AMS5915_0005_D   | differential / relative    | 0...500 Pa           |
+| AMS 5915-0010-D   | AMS5915_0010_D   | differential / relative    | 0...1000 Pa          |
+| AMS 5915-0005-D-B | AMS5915_0005_D_B | bidirectional differential | -500...+500 Pa       |
+| AMS 5915-0010-D-B | AMS5915_0010_D_B | bidirectional differential | -1000...+1000 Pa     |
+| AMS 5915-0020-D   | AMS5915_0020_D   | differential / relative    | 0...2000 Pa          |
+| AMS 5915-0050-D   | AMS5915_0050_D   | differential / relative    | 0...5000 Pa          |
+| AMS 5915-0100-D   | AMS5915_0100_D   | differential / relative    | 0...10000 Pa         |
+| AMS 5915-0020-D-B | AMS5915_0020_D_B | bidirectional differential | -2000...+2000 Pa     |
+| AMS 5915-0050-D-B | AMS5915_0050_D_B | bidirectional differential | -5000...+5000 Pa     |
+| AMS 5915-0100-D-B | AMS5915_0100_D_B | bidirectional differential | -10000...+10000 Pa   |
+| AMS 5915-0200-D   | AMS5915_0200_D   | differential / relative    | 0...20000 Pa         |
+| AMS 5915-0350-D   | AMS5915_0350_D   | differential / relative    | 0...35000 Pa         |
+| AMS 5915-1000-D   | AMS5915_1000_D   | differential / relative    | 0...100000 Pa        |
+| AMS 5915-2000-D   | AMS5915_2000_D   | differential / relative    | 0...200000 Pa        |
+| AMS 5915-4000-D   | AMS5915_4000_D   | differential / relative    | 0...400000 Pa        |
+| AMS 5915-7000-D   | AMS5915_7000_D   | differential / relative    | 0...700000 Pa        |
+| AMS 5915-10000-D  | AMS5915_10000_D  | differential / relative    | 0...1000000 Pa       |
+| AMS 5915-0200-D-B | AMS5915_0200_D_B | bidirectional differential | -20000...+20000 Pa   |
+| AMS 5915-0350-D-B | AMS5915_0350_D_B | bidirectional differential | -35000...+35000 Pa   |
+| AMS 5915-1000-D-B | AMS5915_1000_D_B | bidirectional differential | -100000...+100000 Pa |
+| AMS 5915-1000-A   | AMS5915_1000_A   | absolute                   | 0...100000 Pa        |
+| AMS 5915-1200-B   | AMS5915_1200_B   | barometric                 | 70000...120000 Pa    |
+
+For example, the following code declares an AMS5915 object called *sPress* with an AMS5915-1200-B sensor located on I2C bus 0 with an I2C address of 0x10:
 
 ```C++
-AMS5915 sPress(0x10,0,"AMS5915-1200-B");
+AMS5915 sPress(0x10,0,AMS5915_1200_B);
 ```
 
 **void begin()**

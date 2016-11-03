@@ -2,7 +2,7 @@
 AMS5915.cpp
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-10-03
+2016-11-03
 
 Copyright (c) 2016 Bolder Flight Systems
 
@@ -30,11 +30,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #include "AMS5915.h"
 #include <i2c_t3.h>  // I2C library
 
-/* AMS5812 object, input the I2C address and chip name (i.e. "AMS5812-0150-B") */
-AMS5915::AMS5915(uint8_t address, uint8_t bus, String type){
+/* AMS5915 object, input the I2C address and enumerated chip name (i.e. AMS5915_1200_B) */
+AMS5915::AMS5915(uint8_t address, uint8_t bus, ams5915_transducer type){
 	_address = address; // I2C address
 	_bus = bus; // I2C bus
-	_type = type; // string, transducer type
+	_type = type; // transducer type
 }
 
 /* starts the I2C communication and sets the pressure and temperature ranges using getTransducer */
@@ -146,116 +146,96 @@ uint16_t AMS5915::readPressureBytes(){
 void AMS5915::getTransducer(){
 
   // setting the min and max pressures based on which transducer it is
-  if(_type.equals("AMS5915-0005-D")){
-    _pMin = AMS5915_0005_D_P_MIN;
-    _pMax = AMS5915_0005_D_P_MAX;
+  switch(_type) {
+    case AMS5915_0005_D:
+        _pMin = AMS5915_0005_D_P_MIN;
+        _pMax = AMS5915_0005_D_P_MAX;
+        break;
+    case AMS5915_0010_D:
+        _pMin = AMS5915_0010_D_P_MIN;
+        _pMax = AMS5915_0010_D_P_MAX;
+        break;
+    case AMS5915_0005_D_B:
+        _pMin = AMS5915_0005_D_B_P_MIN;
+        _pMax = AMS5915_0005_D_B_P_MAX;
+        break;
+    case AMS5915_0010_D_B:
+        _pMin = AMS5915_0010_D_B_P_MIN;
+        _pMax = AMS5915_0010_D_B_P_MAX;
+        break;
+    case AMS5915_0020_D:
+        _pMin = AMS5915_0020_D_P_MIN;
+        _pMax = AMS5915_0020_D_P_MAX;
+        break;
+    case AMS5915_0050_D:
+        _pMin = AMS5915_0050_D_P_MIN;
+        _pMax = AMS5915_0050_D_P_MAX;
+        break;
+    case AMS5915_0100_D:
+        _pMin = AMS5915_0100_D_P_MIN;
+        _pMax = AMS5915_0100_D_P_MAX;
+        break;
+    case AMS5915_0020_D_B:
+        _pMin = AMS5915_0020_D_B_P_MIN;
+        _pMax = AMS5915_0020_D_B_P_MAX;
+        break;
+    case AMS5915_0050_D_B:
+        _pMin = AMS5915_0050_D_B_P_MIN;
+        _pMax = AMS5915_0050_D_B_P_MAX;
+        break;
+    case AMS5915_0100_D_B:
+        _pMin = AMS5915_0100_D_B_P_MIN;
+        _pMax = AMS5915_0100_D_B_P_MAX;
+        break;
+    case AMS5915_0200_D:
+        _pMin = AMS5915_0200_D_P_MIN;
+        _pMax = AMS5915_0200_D_P_MAX;
+        break;
+    case AMS5915_0350_D:
+        _pMin = AMS5915_0350_D_P_MIN;
+        _pMax = AMS5915_0350_D_P_MAX;
+        break;
+    case AMS5915_1000_D:
+        _pMin = AMS5915_1000_D_P_MIN;
+        _pMax = AMS5915_1000_D_P_MAX;
+        break;
+    case AMS5915_2000_D:
+        _pMin = AMS5915_2000_D_P_MIN;
+        _pMax = AMS5915_2000_D_P_MAX;
+        break;
+    case AMS5915_4000_D:
+        _pMin = AMS5915_4000_D_P_MIN;
+        _pMax = AMS5915_4000_D_P_MAX;
+        break;
+    case AMS5915_7000_D:
+        _pMin = AMS5915_7000_D_P_MIN;
+        _pMax = AMS5915_7000_D_P_MAX;
+        break;
+    case AMS5915_10000_D:
+        _pMin = AMS5915_10000_D_P_MIN;
+        _pMax = AMS5915_10000_D_P_MAX;
+        break;
+    case AMS5915_0200_D_B:
+        _pMin = AMS5915_0200_D_B_P_MIN;
+        _pMax = AMS5915_0200_D_B_P_MAX;
+        break;
+    case AMS5915_0350_D_B:
+        _pMin = AMS5915_0350_D_B_P_MIN;
+        _pMax = AMS5915_0350_D_B_P_MAX;
+        break;
+    case AMS5915_1000_D_B:
+        _pMin = AMS5915_1000_D_B_P_MIN;
+        _pMax = AMS5915_1000_D_B_P_MAX;
+        break;
+    case AMS5915_1000_A:
+        _pMin = AMS5915_1000_A_P_MIN;
+        _pMax = AMS5915_1000_A_P_MAX;
+        break;
+    case AMS5915_1200_B:
+        _pMin = AMS5915_1200_B_P_MIN;
+        _pMax = AMS5915_1200_B_P_MAX;
+        break;
   }
-
-  if(_type.equals("AMS5915-0010-D")){
-    _pMin = AMS5915_0010_D_P_MIN;
-    _pMax = AMS5915_0010_D_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-0005-D-B")){
-    _pMin = AMS5915_0005_D_B_P_MIN;
-    _pMax = AMS5915_0005_D_B_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-0010-D-B")){
-    _pMin = AMS5915_0010_D_B_P_MIN;
-    _pMax = AMS5915_0010_D_B_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-0020-D")){
-    _pMin = AMS5915_0020_D_P_MIN;
-    _pMax = AMS5915_0020_D_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-0050-D")){
-    _pMin = AMS5915_0050_D_P_MIN;
-    _pMax = AMS5915_0050_D_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-0100-D")){
-    _pMin = AMS5915_0100_D_P_MIN;
-    _pMax = AMS5915_0100_D_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-0020-D-B")){
-    _pMin = AMS5915_0020_D_B_P_MIN;
-    _pMax = AMS5915_0020_D_B_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-0050-D-B")){
-    _pMin = AMS5915_0050_D_B_P_MIN;
-    _pMax = AMS5915_0050_D_B_P_MAX;
-  }  
-
-  if(_type.equals("AMS5915-0100-D-B")){
-    _pMin = AMS5915_0100_D_B_P_MIN;
-    _pMax = AMS5915_0100_D_B_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-0200-D")){
-    _pMin = AMS5915_0200_D_P_MIN;
-    _pMax = AMS5915_0200_D_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-0350-D")){
-    _pMin = AMS5915_0350_D_P_MIN;
-    _pMax = AMS5915_0350_D_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-1000-D")){
-    _pMin = AMS5915_1000_D_P_MIN;
-    _pMax = AMS5915_1000_D_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-2000-D")){
-    _pMin = AMS5915_2000_D_P_MIN;
-    _pMax = AMS5915_2000_D_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-4000-D")){
-    _pMin = AMS5915_4000_D_P_MIN;
-    _pMax = AMS5915_4000_D_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-7000-D")){
-    _pMin = AMS5915_7000_D_P_MIN;
-    _pMax = AMS5915_7000_D_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-10000-D")){
-    _pMin = AMS5915_10000_D_P_MIN;
-    _pMax = AMS5915_10000_D_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-0200-D-B")){
-    _pMin = AMS5915_0200_D_B_P_MIN;
-    _pMax = AMS5915_0200_D_B_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-0350-D-B")){
-    _pMin = AMS5915_0350_D_B_P_MIN;
-    _pMax = AMS5915_0350_D_B_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-1000-D-B")){
-    _pMin = AMS5915_1000_D_B_P_MIN;
-    _pMax = AMS5915_1000_D_B_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-1000-A")){
-    _pMin = AMS5915_1000_A_P_MIN;
-    _pMax = AMS5915_1000_A_P_MAX;
-  }
-
-  if(_type.equals("AMS5915-1200-B")){
-    _pMin = AMS5915_1200_B_P_MIN;
-    _pMax = AMS5915_1200_B_P_MAX;
-  }
-
 }
 
 /* gets only the pressure value, PA */
