@@ -1,8 +1,8 @@
 # AMS5915
-Library for communicating with [AMSYS AMS 5915](http://www.amsys.info/products/ams5915.htm) pressure transducers using Teensy 3.x and Teensy LC devices.
+Library for communicating with [Analog Microelectronics AMS 5915](http://www.analog-micro.com/en/products/sensors/pressuresensors/ams5915/) pressure transducers using Teensy 3.x and Teensy LC devices.
 
 # Description
-The AMSYS AMS 5915 pressure transducers are fully signal conditioned, amplified, and temperature compensated over a temperature range of -25 to +85 C. These sensors generate data with high precision, high stability and low drift. Digital measurements are sampled with a 14 bit resolution. The AMSYS AMS 5915 sensors are available in a wide variety of pressure ranges and in configurations suited for barometric, differential, and bidirectional differential measurement.
+The Analog Microelectronics AMS 5915 pressure transducers are fully signal conditioned, amplified, and temperature compensated over a temperature range of -25 to +85 C. These sensors generate data with high precision, high stability and low drift. Digital measurements are sampled with a 14 bit resolution. The AMS 5915 sensors are available in a wide variety of pressure ranges and in configurations suited for barometric, differential, and bidirectional differential measurement.
 
 This library communicates with the AMS 5915 sensors using an I2C interface. The default I2C address for the AMS 5915 is 0x28; however, a USB starter kit may be purchased to enable programming additional slave addresses. Pressure and temperature data can be provided up to a rate of 2 kHz.
 
@@ -77,9 +77,9 @@ sPress.getData(&pressure,&temperature);
 ```
 
 # Wiring and Pullups
-Please refer to the [AMSYS AMS 5915 datasheet](https://github.com/bolderflight/AMS5915/blob/master/docs/ams5915.pdf) and the [Teensy pinout diagrams](https://www.pjrc.com/teensy/pinout.html).
+Please refer to the [Analog Microelectronics AMS 5915 datasheet](https://github.com/bolderflight/AMS5915/blob/master/docs/ams5915.pdf) and the [Teensy pinout diagrams](https://www.pjrc.com/teensy/pinout.html).
 
-The silver dot on the AMSYS AMS 5915 marks the location of Pin 1. The AMS 5915 pinout is:
+The silver dot on the AMS 5915 marks the location of Pin 1. The AMS 5915 pinout is:
 
    * Pin 1: Ground
    * Pin 2: VCC, this should be a 3.0V to 3.6V power source. This can be supplied by the Teensy 3.3V output.
