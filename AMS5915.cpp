@@ -30,11 +30,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #include "AMS5915.h"
 #include <i2c_t3.h>  // I2C library
 
+/* Default constructor */
+AMS5915::AMS5915(){
+  _address = 0x28; // I2C address
+  _bus = 0; // I2C bus
+  _type = AMS5915_1200_B; // transducer type
+}
+
 /* AMS5915 object, input the I2C address and enumerated chip name (i.e. AMS5915_1200_B) */
 AMS5915::AMS5915(uint8_t address, uint8_t bus, ams5915_transducer type){
 	_address = address; // I2C address
 	_bus = bus; // I2C bus
 	_type = type; // transducer type
+}
+
+void AMS5915::configure(uint8_t address, uint8_t bus, ams5915_transducer type){
+  _address = address; // I2C address
+  _bus = bus; // I2C bus
+  _type = type; // transducer type
 }
 
 /* starts the I2C communication and sets the pressure and temperature ranges using getTransducer */

@@ -55,7 +55,9 @@ enum ams5915_transducer
 
 class AMS5915{
   public:
+    AMS5915();
     AMS5915(uint8_t address, uint8_t bus, ams5915_transducer type);
+    void configure(uint8_t address, uint8_t bus, ams5915_transducer type);
     void begin();
     float getPressure();
     float getTemperature();
