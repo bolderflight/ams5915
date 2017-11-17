@@ -2,9 +2,8 @@
 AMS5915_example.ino
 Brian R Taylor
 brian.taylor@bolderflight.com
-2016-11-03
 
-Copyright (c) 2016 Bolder Flight Systems
+Copyright (c) 2017 Bolder Flight Systems
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -26,43 +25,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 // an AMS5915 object, which is a
 // static pressure sensure at I2C
-// address of 0x10, on I2C bus 0,
+// address of 0x12, on I2C bus 0,
 // and is a AMS5915-1200-B
-AMS5915 sPress(0x10,0, AMS5915_1200_B);
+AMS5915 sPress(Wire,0x12,AMS5915::AMS5915_1200_B);
 
 void setup() {
   // serial to display data
   Serial.begin(9600);
+  while(!Serial){}
 
   // starting communication with the 
   // static pressure transducer
-  sPress.begin();
+  if (sPress.begin() < 0) {
+    Serial.println("Error communicating with sensor, check wiring and I2C address");
+    while(1){}
+  }
 }
 
 void loop() {
-  float pressure, temperature;
-
-  // getting both the temperature (C) and pressure (PA)
-  sPress.getData(&pressure,&temperature);
+  // read the sensor
+  sPress.readSensor();
 
   // displaying the data
-  Serial.print(pressure,6);
+  Serial.print(sPress.getPressure_Pa(),6);
   Serial.print("\t");
-  Serial.println(temperature,6);
-  delay(100);
-
-  // getting just the pressure, PA
-  pressure = sPress.getPressure();
+  Serial.println(sPress.getTemperature_C(),6);
   delay(10);
-
-  // getting just the temperature, C
-  temperature = sPress.getTemperature();
-  delay(10);
-
-  // displaying the data
-  Serial.print(pressure,6);
-  Serial.print("\t");
-  Serial.println(temperature,6);
-  delay(100);
 }
-
