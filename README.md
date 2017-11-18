@@ -87,7 +87,7 @@ Please refer to the [Analog Microelectronics AMS 5915 datasheet](https://github.
 The silver dot on the AMS 5915 marks the location of Pin 1. The AMS 5915 pinout is:
 
    * Pin 1: Ground
-   * Pin 2: VCC, this should be a 3.0V to 3.6V power source. This can be supplied by the Teensy 3.3V output.
+   * Pin 2: VCC, this should be a 3.0V to 3.6V power source.
    * Pin 3: SDA
    * Pin 4: SCL
 
