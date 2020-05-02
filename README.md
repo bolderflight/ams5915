@@ -1,6 +1,9 @@
 # AMS5915
 Arduino library for communicating with [Analog Microelectronics AMS 5915](http://www.analog-micro.com/en/products/sensors/pressuresensors/ams5915/) pressure transducers.
 
+# License
+This library is licensed under the GPLV3. Please contact us at [support@bolderflight.com](mailto:support@bolderflight.com) to obtain other licenses.
+
 # Description
 The Analog Microelectronics AMS 5915 pressure transducers are fully signal conditioned, amplified, and temperature compensated over a temperature range of -25 to +85 C. These sensors generate data with high precision, high stability and low drift. Digital measurements are sampled with a 14 bit resolution. The AMS 5915 sensors are available in a wide variety of pressure ranges and in configurations suited for barometric, differential, and bidirectional differential measurement.
 
