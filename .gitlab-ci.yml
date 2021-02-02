@@ -1,0 +1,11 @@
+stages:
+  - lint
+
+Lint:
+  stage: lint
+  tags:
+    - bfs
+  script: 
+    - cpplint.py --verbose=0 src/ams5915/ams5915.cc
+    - cpplint.py --verbose=0 include/ams5915/ams5915.h
+  
