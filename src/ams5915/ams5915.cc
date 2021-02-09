@@ -25,7 +25,7 @@
 
 #include "ams5915/ams5915.h"
 #include "core/core.h"
-#include "global_defs/global_defs.h"
+#include "units/units.h"
 
 namespace sensors {
 
@@ -174,7 +174,7 @@ bool Ams5915::Read() {
                     DIG_OUT_PRANGE_ * pres_range_mbar_ + min_pres_mbar_;
   float temp_c = static_cast<float>(temp_cnts * 200) / 2048.0f - 50.0f;
   if (temp_c > MAX_TEMPERATURE_) {return false;}
-  pres_pa_ = global::conversions::Mbar_to_Pa(pres_mbar);
+  pres_pa_ = conversions::Mbar_to_Pa(pres_mbar);
   temp_c_ = temp_c;
   return true;
 }
