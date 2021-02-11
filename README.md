@@ -1,22 +1,23 @@
-# AMS5915
-Arduino library for communicating with [Analog Microelectronics AMS 5915](http://www.analog-micro.com/en/products/sensors/pressuresensors/ams5915/) pressure transducers.
-
-# License
-This library is licensed under the GPLV3. Please contact us at [support@bolderflight.com](mailto:support@bolderflight.com) to obtain other licenses.
+# ams5915-arduino
+This library communicates with [AMS-5915](https://www.analog-micro.com/en/products/pressure-sensors/board-mount-pressure-sensors/ams5915/) pressure transducers and is built for use with the Arduino IDE. 
+   * [License](LICENSE.md)
+   * [Changelog](CHANGELOG.md)
 
 # Description
-The Analog Microelectronics AMS 5915 pressure transducers are fully signal conditioned, amplified, and temperature compensated over a temperature range of -25 to +85 C. These sensors generate data with high precision, high stability and low drift. Digital measurements are sampled with a 14 bit resolution. The AMS 5915 sensors are available in a wide variety of pressure ranges and in configurations suited for barometric, differential, and bidirectional differential measurement.
+The Analog Microelectronics AMS-5915 pressure transducers are fully signal conditioned, amplified, and temperature compensated over a temperature range of -25 to +85 C. These sensors generate data with high precision, high stability and low drift. Digital measurements are sampled with a 14 bit resolution. The AMS 5915 sensors are available in a wide variety of pressure ranges and in configurations suited for barometric, differential, and bidirectional differential measurement.
 
 # Usage
 This library communicates with the AMS 5915 sensors using an I2C interface. The default I2C address for the AMS 5915 is 0x28; however, a USB starter kit may be purchased to enable programming additional slave addresses. Pressure and temperature data can be provided at rates of up to 2 kHz.
 
 ## Installation
-Simply clone or download and extract the zipped library into your Arduino/libraries folder.
+Simply clone or download and extract the zipped library into your Arduino/libraries folder. The library is added as:
 
-## Function Description
-### Object Declaration
-**AMS5915(TwoWire &bus,uint8_t address,AMS5915::Transducer type)**
-An AMS5915 object should be constructed, specifying the I2C bus, AMS 5915 I2C address, and the AMS 5915 transducer type. The enumerated transducer types are:
+```C++
+#include "ams5915.h"
+```
+
+## Methods
+**Ams5915(i2c_t3 &ast;bus, uint8_t addr, Transducer type)** Creates an Ams5915 object. A pointer to the I2C bus object is passed along with the I2C address of the sensor and the AMS-5915 transducer type. The enumerated transducer types are:
 
 | Sensor Name       | Enumerated Type  | Pressure Type              | Pressure Range       |
 | -----------       | ---------------  | ---------------            | ---------------      |
@@ -43,46 +44,46 @@ An AMS5915 object should be constructed, specifying the I2C bus, AMS 5915 I2C ad
 | AMS 5915-1000-A   | AMS5915_1000_A   | absolute                   | 0...100000 Pa        |
 | AMS 5915-1200-B   | AMS5915_1200_B   | barometric                 | 70000...120000 Pa    |
 
-For example, the following code declares an AMS5915 object called *sPress* with an AMS5915-1200-B sensor located on I2C bus 0 with an I2C address of 0x10:
+For example, the following code declares an AMS5915 object called *ams* with an AMS5915-1200-B sensor located on I2C bus 0 with an I2C address of 0x10:
 
 ```C++
-AMS5915 sPress(Wire,0x10,AMS5915::AMS5915_1200_B);
+Ams5915 ams(&Wire, 0x10, Ams5915::AMS5915_1200_B);
 ```
 
-### Setup Functions
-**int begin()**
-This should be called in your setup function. It initializes and tests the I2C communication and sets the minimum and maximum pressure and temperature values based on the AMS 5915 sensor. The return value is positive if successful in initializing communication with the pressure transducer and negative if it is not successful.
+**bool Begin()** Initializes communication with the sensor and configures the sensor driver for the specified transducer. True is returned if communication is able to be established with the sensor and configuration completes successfully, otherwise, false is returned.
 
 ```C++
-sPress.begin();
+bool status = ams.Begin();
+if (!status) {
+  // ERROR
+}
 ```
 
-### Data Collection Functions
-**int readSensor()** reads the sensor and stores the newest data in a buffer, it should be called every time you would like to retrieve the most current data from the sensor. This function returns a positive value if it's succesful in retrieving the data and negative if not succesful.
+**bool Read()** Reads data from the AMS-5915 and stores the data in the Ams5915 object. Returns true if data is successfully read, otherwise, returns false.
 
 ```C++
-sPress.readSensor();
+/* Read the sensor data */
+if (ams.Read()) {
+}
 ```
 
-**float getPressure_Pa()** gets the pressure value from the data buffer and returns it in units of Pascal.
+**float pressure_pa()** Returns the pressure data from the Ams5915 object in units of Pa.
 
 ```C++
-float pressure;
-pressure = sPress.getPressure_Pa();
+float pressure = ams.pressure_pa();
 ```
 
-**float getTemperature_C()** gets the temperature value from the data buffer and returns it in units of degrees Celsius.
+**float die_temperature_c** Returns the die temperature of the sensor from the Ams5915 object in units of degrees C.
 
 ```C++
-float temperature;
-temperature = sPress.getTemperature_C();
+float temperature = ams.die_temperature_c();
 ```
 
 ## Example List
 * **AMS5915_example**: demonstrates declaring an object, initializing the sensor, and collecting data. In this example the sensor is an AMS5915-1200-B with a sensor address of 0x12 located on I2C bus 0. 
 
 # Wiring and Pullups
-Please refer to the [Analog Microelectronics AMS 5915 datasheet](https://github.com/bolderflight/AMS5915/blob/master/docs/ams5915.pdf) and your microcontroller's pinout diagram.
+Please refer to the [Analog Microelectronics AMS 5915 datasheet](https://github.com/bolderflight/ams5915-arduino/blob/main/docs/ams5915.pdf) and your microcontroller's pinout diagram.
 
 The silver dot on the AMS 5915 marks the location of Pin 1. The AMS 5915 pinout is:
 
@@ -91,4 +92,4 @@ The silver dot on the AMS 5915 marks the location of Pin 1. The AMS 5915 pinout 
    * Pin 3: SDA
    * Pin 4: SCL
 
-4.7 kOhm resistors should be used as pullups on SDA and SCL, these resistors should pullup with a 3.3V source.
+2.2 kOhm resistors should be used as pullups on SDA and SCL, these resistors should pullup with a 3.3V source.
