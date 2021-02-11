@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.1
+- Fixed file name case issues
+
 ## v2.0.0
 - Updated to match our [AMS-5915 library](https://github.com/bolderflight/ams5915) for flight software
 - Updated license to MIT
