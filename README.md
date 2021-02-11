@@ -80,7 +80,7 @@ float temperature = ams.die_temperature_c();
 ```
 
 ## Example List
-* **AMS5915_example**: demonstrates declaring an object, initializing the sensor, and collecting data. In this example the sensor is an AMS5915-1200-B with a sensor address of 0x12 located on I2C bus 0. 
+* **ams5915_example**: demonstrates declaring an object, initializing the sensor, and collecting data. In this example the sensor is an AMS5915-1200-B with a sensor address of 0x12 located on I2C bus 0. 
 
 # Wiring and Pullups
 Please refer to the [Analog Microelectronics AMS 5915 datasheet](https://github.com/bolderflight/ams5915-arduino/blob/main/docs/ams5915.pdf) and your microcontroller's pinout diagram.
