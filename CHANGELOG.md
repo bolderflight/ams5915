@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.2
+- Updated std::size_t to int to support microcontrollers without access to STL
+
 ## v2.0.1
 - Fixed file name case issues
 
