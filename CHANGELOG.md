@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.0
+- Updated to namespace *bfs*
+- Removed units dependency since it's no longer used
+
 ## v1.0.5
 - Updated to support core v2.0.4 and units v2.0.0
 

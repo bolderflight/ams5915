@@ -5,7 +5,7 @@ if (DEFINED MCU)
 endif()
 # Project information
 project(Ams5915
-	VERSION 1.0.5
+	VERSION 2.0.0
 	DESCRIPTION "AMS5915 sensor driver"
 	LANGUAGES CXX
 )
@@ -21,13 +21,6 @@ if (DEFINED MCU)
 		GIT_TAG v2.0.4
 	)
 	FetchContent_MakeAvailable(core)
-	# Fetch global-defs
-	FetchContent_Declare(
-		units
-		GIT_REPOSITORY 	https://github.com/bolderflight/units.git
-		GIT_TAG v2.0.0
-	)
-	FetchContent_MakeAvailable(units)
 	# Add the library target
 	add_library(ams5915
 		src/ams5915/ams5915.cc
@@ -37,7 +30,6 @@ if (DEFINED MCU)
 	target_link_libraries(ams5915
 		PUBLIC
 			core
-			units
 	)
 	# Setup include directories 
 	target_include_directories(ams5915 PUBLIC 
