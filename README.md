@@ -72,7 +72,7 @@ This library is within the namespace *bfs*.
 For example, the following code declares an AMS5915 object called *ams* with an AMS5915-1200-B sensor located on I2C bus 0 with an I2C address of 0x10:
 
 ```C++
-bfs::Ams5915 ams(&Wire, 0x10, sensors::Ams5915::AMS5915_1200_B);
+bfs::Ams5915 ams(&Wire, 0x10, bfs::Ams5915::AMS5915_1200_B);
 ```
 
 **bool Begin()** Initializes communication with the sensor and configures the sensor driver for the specified transducer. True is returned if communication is able to be established with the sensor and configuration completes successfully, otherwise, false is returned.
