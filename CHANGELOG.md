@@ -1,5 +1,8 @@
 # Changelog
 
+## v3.0.0
+- Updated to use a template parameter for specifying the transducer type. This change enables this class' constructor to work similarly to other pressure tranducer drivers.
+
 ## v2.0.0
 - Updated to namespace *bfs*
 - Removed units dependency since it's no longer used

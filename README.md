@@ -42,7 +42,7 @@ This library is within the namespace *bfs*.
 
 ## Methods
 
-**Ams5915(i2c_t3 &ast;bus, uint8_t addr, Transducer type)** Creates an Ams5915 object. A pointer to the I2C bus object is passed along with the I2C address of the sensor and the AMS-5915 transducer type. The enumerated transducer types are:
+**enum Ams5915Transducer** The transducer type is enumerated as:
 
 | Sensor Name       | Enumerated Type  | Pressure Type              | Pressure Range       |
 | -----------       | ---------------  | ---------------            | ---------------      |
@@ -69,13 +69,15 @@ This library is within the namespace *bfs*.
 | AMS 5915-1000-A   | AMS5915_1000_A   | absolute                   | 0...100000 Pa        |
 | AMS 5915-1200-B   | AMS5915_1200_B   | barometric                 | 70000...120000 Pa    |
 
+**Ams5915<Ams5915Transducer>(i2c_t3 &ast;bus, uint8_t addr)** Creates an Ams5915 object. A pointer to the I2C bus object is passed along with the I2C address of the sensor. This object is templated by the transducer type.
+
 For example, the following code declares an AMS5915 object called *ams* with an AMS5915-1200-B sensor located on I2C bus 0 with an I2C address of 0x10:
 
 ```C++
-bfs::Ams5915 ams(&Wire, 0x10, bfs::Ams5915::AMS5915_1200_B);
+bfs::Ams5915<bfs::AMS5915_1200_B> ams(&Wire, 0x10);
 ```
 
-**bool Begin()** Initializes communication with the sensor and configures the sensor driver for the specified transducer. True is returned if communication is able to be established with the sensor and configuration completes successfully, otherwise, false is returned.
+**bool Begin()** Initializes communication with the sensor. True is returned if communication is able to be established with the sensor, otherwise, false is returned.
 
 ```C++
 bool status = ams.Begin();

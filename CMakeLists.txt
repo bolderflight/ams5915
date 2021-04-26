@@ -23,7 +23,6 @@ if (DEFINED MCU)
 	FetchContent_MakeAvailable(core)
 	# Add the library target
 	add_library(ams5915
-		src/ams5915/ams5915.cc
 		include/ams5915/ams5915.h
 	)
 	# Link libraries

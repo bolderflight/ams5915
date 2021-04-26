@@ -24,7 +24,7 @@
 */
 #include "ams5915/ams5915.h"
 
-bfs::Ams5915 ams(&Wire, 0x28, bfs::Ams5915::AMS5915_1200_B);
+bfs::Ams5915<bfs::AMS5915_1200_B> ams(&Wire, 0x28);
 
 int main() {
   Serial.begin(115200);
