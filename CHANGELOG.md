@@ -1,5 +1,8 @@
 # Changelog
 
+## v4.0.0
+- Updated to work with the *Pres* interface
+
 ## v3.0.0
 - Updated to use a template parameter for specifying the transducer type. This change enables this class' constructor to work similarly to other pressure tranducer drivers.
 

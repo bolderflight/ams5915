@@ -24,27 +24,41 @@
 */
 #include "ams5915/ams5915.h"
 
-bfs::Ams5915<bfs::AMS5915_1200_B> ams(&Wire, 0x28);
+/* AMS5915 pressure transducer */
+bfs::Ams5915 pres;
+
+/* Pressure data */
+bfs::PresData data;
 
 int main() {
+  /* Serial to display data */
   Serial.begin(115200);
   while(!Serial) {}
-  
-  bool status = ams.Begin();
-  unsigned int t1, t2;
+  /* Config */
+  bfs::PresConfig config = {
+    .bus = &Wire1,
+    .dev = 0x11,
+    .transducer = bfs::AMS5915_0010_D,
+    .sampling_period_ms = 20
+  };
+  /* Init the bus */
+  Wire1.begin();
+  Wire1.setClock(400000);
+  /* Initialize and configure pressure transducer */
+  if (!pres.Init(config)) {
+    Serial.println("Error initializing communication with pressure transducer");
+    while(1) {}
+  }
+  /* Collect and display data */
   while (1) {
-    t1 = micros();
-    status = ams.Read();
-    t2 = micros();
-    float p = ams.pressure_pa();
-    float t = ams.die_temperature_c();
-    Serial.print(p);
-    Serial.print("\t");
-    Serial.print(t);
-    Serial.print("\t");
-    Serial.print(status);
-    Serial.print("\t");
-    Serial.println(t2 - t1);
-    delay(500);
+    if (pres.Read(&data)) {
+      Serial.print(data.new_data);
+      Serial.print("\t");
+      Serial.print(data.healthy);
+      Serial.print("\t");
+      Serial.print(data.pres_pa);
+      Serial.print("\n");
+    }
+    delay(config.sampling_period_ms);
   }
 }
