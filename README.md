@@ -69,39 +69,36 @@ This library is within the namespace *bfs*.
 | AMS 5915-1000-A   | AMS5915_1000_A   | absolute                   | 0...100000 Pa        |
 | AMS 5915-1200-B   | AMS5915_1200_B   | barometric                 | 70000...120000 Pa    |
 
-**Ams5915<Ams5915Transducer>(i2c_t3 &ast;bus, uint8_t addr)** Creates an Ams5915 object. A pointer to the I2C bus object is passed along with the I2C address of the sensor. This object is templated by the transducer type.
+This driver conforms to the [Pressure interface](https://github.com/bolderflight/pres); please refer to those documents for information on the *PresConfig* and *PresData* structs.
 
-For example, the following code declares an AMS5915 object called *ams* with an AMS5915-1200-B sensor located on I2C bus 0 with an I2C address of 0x10:
-
-```C++
-bfs::Ams5915<bfs::AMS5915_1200_B> ams(&Wire, 0x10);
-```
-
-**bool Begin()** Initializes communication with the sensor. True is returned if communication is able to be established with the sensor, otherwise, false is returned.
+**bool Init(const PresConfig &ref)** Initializes communication with the pressure transducer, configures it according to the *PresConfig* struct, and estimates differential pressure biases to be removed during *Read*. Note that the bus is not started within init and should be initialized elsewhere. Returns true on successfully initializing and configuring the pressure transducer.
 
 ```C++
-bool status = ams.Begin();
-if (!status) {
-  // ERROR
+/* AMS5915 pressure transducer */
+bfs::Ams5915 pres;
+/* Config */
+bfs::PresConfig config = {
+   .bus = &Wire1,
+   .dev = 0x11,
+   .transducer = bfs::AMS5915_0010_D,
+   .sampling_period_ms = 20
+};
+/* Init the bus */
+Wire1.begin();
+Wire1.setClock(400000);
+/* Initialize and configure pressure transducer */
+if (!pres.Init(config)) {
+   Serial.println("Error initializing communication with pressure transducer");
+   while(1) {}
 }
 ```
 
-**bool Read()** Reads data from the AMS-5915 and stores the data in the Ams5915 object. Returns true if data is successfully read, otherwise, returns false.
+**bool Read(PresData &ast; const ptr)** Reads data from the pressure transducer and passes the data into the PresData struct. Returns true on successfully reading new data.
 
 ```C++
-/* Read the sensor data */
-if (ams.Read()) {
+/* Pressure data */
+bfs::PresData data;
+if (pres.Read(&data)) {
+
 }
-```
-
-**float pressure_pa()** Returns the pressure data from the Ams5915 object in units of Pa.
-
-```C++
-float pressure = ams.pressure_pa();
-```
-
-**float die_temperature_c** Returns the die temperature of the sensor from the Ams5915 object in units of degrees C.
-
-```C++
-float temperature = ams.die_temperature_c();
 ```
