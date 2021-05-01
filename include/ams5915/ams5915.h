@@ -98,6 +98,9 @@ class Ams5915 {
   bool ReadPres();
 };
 
+/* Checking conformance to Pressure interface */
+static_assert(Pres<Ams5915>, "Ams5915 does not conform to Pres interface");
+
 }  // namespace bfs
 
 #endif  // INCLUDE_AMS5915_AMS5915_H_
