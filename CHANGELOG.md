@@ -1,5 +1,8 @@
 # Changelog
 
+## v4.0.1
+- Added static_assert to check conformance with *Pres* interface
+
 ## v4.0.0
 - Updated to work with the *Pres* interface
 

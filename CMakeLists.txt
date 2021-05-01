@@ -5,7 +5,7 @@ if (DEFINED MCU)
 endif()
 # Project information
 project(Ams5915
-	VERSION 4.0.0
+	VERSION 4.0.1
 	DESCRIPTION "AMS5915 sensor driver"
 	LANGUAGES CXX
 )
