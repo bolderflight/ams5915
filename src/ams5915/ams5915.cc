@@ -70,6 +70,7 @@ bool Ams5915::Read(PresData * const ptr) {
   if (ptr->new_data) {
     health_timer_ms_ = 0;
     ptr->pres_pa = pres_pa_ + pres_bias_pa_;
+    ptr->die_temp_c = temp_c_;
   }
   return ptr->new_data;
 }
