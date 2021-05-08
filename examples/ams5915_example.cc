@@ -36,10 +36,10 @@ int main() {
   while(!Serial) {}
   /* Config */
   bfs::PresConfig config = {
-    .bus = &Wire1,
     .dev = 0x11,
     .transducer = bfs::AMS5915_0010_D,
-    .sampling_period_ms = 20
+    .sampling_period_ms = 20,
+    .bus = &Wire1
   };
   /* Init the bus */
   Wire1.begin();
