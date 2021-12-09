@@ -23,15 +23,21 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef INCLUDE_AMS5915_AMS5915_H_
-#define INCLUDE_AMS5915_AMS5915_H_
- 
+#ifndef SRC_AMS5915_H_
+#define SRC_AMS5915_H_
+
+#if defined(ARDUINO)
 #include "Arduino.h"
 #include "Wire.h"
+#else
+#include "core/core.h"
+#endif
+
+namespace bfs {
 
 class Ams5915 {
  public:
-  enum Transducer {
+  enum Transducer : int8_t {
     AMS5915_0005_D,
     AMS5915_0010_D,
     AMS5915_0005_D_B,
@@ -54,29 +60,33 @@ class Ams5915 {
     AMS5915_1000_D_B,
     AMS5915_1000_A,
     AMS5915_1200_B};
-  Ams5915(TwoWire *bus, uint8_t addr, Transducer type);
+  Ams5915(TwoWire *bus, const uint8_t addr, const Transducer type);
   bool Begin();
   bool Read();
-  inline float pressure_pa() const {return pres_pa_;}
-  inline float die_temperature_c() const {return temp_c_;}
+  inline float pres_pa() const {return pres_pa_;}
+  inline float die_temp_c() const {return temp_c_;}
 
  private:
   /* Communication interface */
   TwoWire *bus_;
   uint8_t addr_;
-  static constexpr uint32_t I2C_CLOCK_ = 400000;
   static constexpr int MAX_TRIES_ = 10;
   /* Min and max pressure, millibar */
   float min_pres_mbar_, max_pres_mbar_, pres_range_mbar_;
   /* Digital output at min and max pressure */
-  static constexpr uint16_t DIG_OUT_PMIN_ = 1638;
-  static constexpr uint16_t DIG_OUT_PMAX_ = 14745;
-  static constexpr float DIG_OUT_PRANGE_ =
-    static_cast<float>(DIG_OUT_PMAX_ - DIG_OUT_PMIN_);
+  static constexpr uint16_t PMIN_ = 1638;
+  static constexpr uint16_t PMAX_ = 14745;
+  static constexpr float PRANGE_ = static_cast<float>(PMAX_ - PMIN_);
   /* Maximum temperature */
   static constexpr float MAX_TEMPERATURE_ = 85.0f;
   /* Data */
+  uint8_t buf_[4];
+  uint8_t bytes_rx_;
+  uint16_t pres_cnts_, temp_cnts_;
+  float pres_mbar_, temp_;
   float pres_pa_, temp_c_;
 };
 
-#endif  // INCLUDE_AMS5915_AMS5915_H_
+}  // namespace bfs
+
+#endif  // SRC_AMS5915_H_

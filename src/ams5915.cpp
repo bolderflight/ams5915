@@ -23,11 +23,17 @@
 * IN THE SOFTWARE.
 */
 
+#include "ams5915.h"  // NOLINT
+#if defined(ARDUINO)
 #include "Arduino.h"
 #include "Wire.h"
-#include "ams5915.h"
+#else
+#include "core/core.h"
+#endif
 
-Ams5915::Ams5915(TwoWire *bus, uint8_t addr, Transducer type) {
+namespace bfs {
+
+Ams5915::Ams5915(TwoWire *bus, const uint8_t addr, const Transducer type) {
   bus_ = bus;
   addr_ = addr;
   switch (type) {
@@ -145,8 +151,6 @@ Ams5915::Ams5915(TwoWire *bus, uint8_t addr, Transducer type) {
   pres_range_mbar_ = max_pres_mbar_ - min_pres_mbar_;
 }
 bool Ams5915::Begin() {
-  bus_->begin();
-  bus_->setClock(I2C_CLOCK_);
   /* Checking to see if we can communicate with sensor */
   for (int tries = 0; tries < MAX_TRIES_; tries++) {
     if (Read()) {
@@ -157,22 +161,22 @@ bool Ams5915::Begin() {
   return false;
 }
 bool Ams5915::Read() {
-  uint8_t buf[4];
-  int bytes_req = sizeof(buf);
-  int bytes_rx = bus_->requestFrom(addr_, bytes_req);
-  if (bytes_rx != bytes_req) {
+  bytes_rx_ = bus_->requestFrom(addr_, sizeof(bus_));
+  if (bytes_rx_ != sizeof(bus_)) {
     return false;
   }
-  for (int i = 0; i < bytes_rx; i++) {
-    buf[i] = bus_->read();
+  for (size_t i = 0; i < bytes_rx_; i++) {
+    buf_[i] = bus_->read();
   }
-  uint16_t pres_cnts = static_cast<uint16_t>(buf[0] & 0x3F) << 8 | buf[1];
-  uint16_t temp_cnts = static_cast<uint16_t>(buf[2]) << 3 | buf[3] & 0xE0 >> 5;
-  float pres_mbar = static_cast<float>(pres_cnts - DIG_OUT_PMIN_) /
-                    DIG_OUT_PRANGE_ * pres_range_mbar_ + min_pres_mbar_;
-  float temp_c = static_cast<float>(temp_cnts * 200) / 2048.0f - 50.0f;
-  if (temp_c > MAX_TEMPERATURE_) {return false;}
-  pres_pa_ = pres_mbar * 100.0f;
-  temp_c_ = temp_c;
+  pres_cnts_ = static_cast<uint16_t>(buf_[0] & 0x3F) << 8 | buf_[1];
+  temp_cnts_ = static_cast<uint16_t>(buf_[2]) << 3 | buf_[3] & 0xE0 >> 5;
+  pres_mbar_ = static_cast<float>(pres_cnts_ - PMIN_) / PRANGE_ *
+               pres_range_mbar_ + min_pres_mbar_;
+  temp_c_ = static_cast<float>(temp_cnts_ * 200) / 2048.0f - 50.0f;
+  if (temp_c_ > MAX_TEMPERATURE_) {return false;}
+  pres_pa_ = pres_mbar_ * 100.0f;
+  temp_c_ = temp_c_;
   return true;
 }
+
+}  // namespace bfs

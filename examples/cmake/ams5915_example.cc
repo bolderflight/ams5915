@@ -28,26 +28,27 @@
 * address of 0x12, on I2C bus 0,
 * and is a AMS5915-1200-B
 */
-Ams5915 static_pres(&Wire, 0x12, Ams5915::AMS5915_1200_B);
+bfs::Ams5915 static_pres(&Wire, 0x12, bfs::Ams5915::AMS5915_1200_B);
 
-void setup() {
+int main() {
   /* Serial to display data */
   Serial.begin(9600);
   while(!Serial){}
+  Wire.begin();
+  Wire.setClock(400000);
   /* Starting communication with the static pressure transducer */
   if (!static_pres.Begin()) {
     Serial.println("Error communicating with sensor");
     while(1){}
   }
-}
-
-void loop() {
-  /* Read the sensor */
-  if (static_pres.Read()) {
-    /* Display the data */
-    Serial.print(static_pres.pressure_pa(), 6);
-    Serial.print("\t");
-    Serial.println(static_pres.die_temperature_c(), 6);
+  while (1) {
+    /* Read the sensor */
+    if (static_pres.Read()) {
+      /* Display the data */
+      Serial.print(static_pres.pressure_pa(), 6);
+      Serial.print("\t");
+      Serial.println(static_pres.die_temperature_c(), 6);
+    }
+    delay(10);
   }
-  delay(10);
 }
