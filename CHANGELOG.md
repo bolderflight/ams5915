@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.0.1
+- Updaing to pull in mcu-support repo for cmake, lib, ld, and tools libs
+
 ## v5.0.0
 - Merging Ams5915 and Ams5915-arduino, this is the first open tag between the two.
 
