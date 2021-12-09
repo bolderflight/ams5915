@@ -47,9 +47,9 @@ void loop() {
   /* Read the sensor */
   if (static_pres.Read()) {
     /* Display the data */
-    Serial.print(static_pres.pressure_pa(), 6);
+    Serial.print(static_pres.pres_pa(), 6);
     Serial.print("\t");
-    Serial.println(static_pres.die_temperature_c(), 6);
+    Serial.println(static_pres.die_temp_c(), 6);
   }
   delay(10);
 }
