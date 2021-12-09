@@ -5,7 +5,7 @@ if (DEFINED MCU)
 endif()
 # Project information
 project(Ams5915
-	VERSION 4.1.0
+	VERSION 5.0.0
 	DESCRIPTION "AMS5915 sensor driver"
 	LANGUAGES CXX
 )
@@ -18,38 +18,22 @@ if (DEFINED MCU)
 	FetchContent_Declare(
 		core
 		GIT_REPOSITORY 	https://github.com/bolderflight/core.git
-		GIT_TAG v2.0.5
+		GIT_TAG v3.0.0
 	)
 	FetchContent_MakeAvailable(core)
-	# Fetch pres
-	FetchContent_Declare(
-		pres
-		GIT_REPOSITORY 	https://github.com/bolderflight/pres.git
-		GIT_TAG v1.2.0
-	)
-	FetchContent_MakeAvailable(pres)
-	# Fetch statistics
-	FetchContent_Declare(
-		statistics
-		GIT_REPOSITORY 	https://github.com/bolderflight/statistics.git
-		GIT_TAG v3.0.1
-	)
-	FetchContent_MakeAvailable(statistics)
 	# Add the library target
 	add_library(ams5915
-		include/ams5915/ams5915.h
-		src/ams5915/ams5915.cc
+		src/ams5915.h
+		src/ams5915.cpp
 	)
 	# Link libraries
 	target_link_libraries(ams5915
 		PUBLIC
 			core
-			pres
-			statistics
 	)
 	# Setup include directories 
 	target_include_directories(ams5915 PUBLIC 
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
 		$<INSTALL_INTERFACE:include>
 	)
 endif()
@@ -58,7 +42,7 @@ endif()
 if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
 	if (DEFINED MCU)
 		# Add the spi example target
-		add_executable(ams5915_example examples/ams5915_example.cc)
+		add_executable(ams5915_example examples/cmake/ams5915_example.cc)
 		# Add the includes
 		target_include_directories(ams5915_example PUBLIC 
 			$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
