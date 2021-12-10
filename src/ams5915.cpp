@@ -161,8 +161,8 @@ bool Ams5915::Begin() {
   return false;
 }
 bool Ams5915::Read() {
-  bytes_rx_ = bus_->requestFrom(addr_, sizeof(bus_));
-  if (bytes_rx_ != sizeof(bus_)) {
+  bytes_rx_ = bus_->requestFrom(addr_, sizeof(buf_));
+  if (bytes_rx_ != sizeof(buf_)) {
     return false;
   }
   for (size_t i = 0; i < bytes_rx_; i++) {
@@ -172,10 +172,10 @@ bool Ams5915::Read() {
   temp_cnts_ = static_cast<uint16_t>(buf_[2]) << 3 | buf_[3] & 0xE0 >> 5;
   pres_mbar_ = static_cast<float>(pres_cnts_ - PMIN_) / PRANGE_ *
                pres_range_mbar_ + min_pres_mbar_;
-  temp_c_ = static_cast<float>(temp_cnts_ * 200) / 2048.0f - 50.0f;
-  if (temp_c_ > MAX_TEMPERATURE_) {return false;}
+  temp_ = static_cast<float>(temp_cnts_ * 200) / 2048.0f - 50.0f;
+  if (temp_ > MAX_TEMPERATURE_) {return false;}
   pres_pa_ = pres_mbar_ * 100.0f;
-  temp_c_ = temp_c_;
+  temp_c_ = temp_;
   return true;
 }
 
