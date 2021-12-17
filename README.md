@@ -24,7 +24,7 @@ Simply clone or download and extract the zipped library into your Arduino/librar
 #include "ams5915.h"
 ```
 
-An example Arduino executable is located in: *examples/arduino/*. Teensy 3.x, 4.x, and LC devices are used for testing under Arduino and this library should be compatible with other Arduino devices.
+An example Arduino executable is located in: *examples/arduino/ams5915_example/ams5915_example.ino*. Teensy 3.x, 4.x, and LC devices are used for testing under Arduino and this library should be compatible with other Arduino devices.
 
 ## CMake
 CMake is used to build this library, which is exported as a library target called *ams5915*. The header is added as:
@@ -58,7 +58,7 @@ This library is within the namespace *bfs*.
 
 # Ams5915
 
-**Ams5915(i2c_t3 &ast;bus, uint8_t addr, Transducer type)** Creates an Ams5915 object. A pointer to the I2C bus object is passed along with the I2C address of the sensor and the AMS-5915 transducer type. The enumerated transducer types are:
+**Ams5915(i2c_t3 &ast;bus, const uint8_t addr, const Transducer type)** Creates an Ams5915 object. A pointer to the I2C bus object is passed along with the I2C address of the sensor and the AMS-5915 transducer type. The enumerated transducer types are:
 
 | Sensor Name       | Enumerated Type  | Pressure Type              | Pressure Range       |
 | -----------       | ---------------  | ---------------            | ---------------      |
