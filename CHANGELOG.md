@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.0.3
+- Updated to use the units library for mbar to Pa conversion
+
 ## v5.0.2
 - Discovered a bug where the potentially wrong size was being used for requesting bytes and the die temperature check was bypassed.
 
