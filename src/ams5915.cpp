@@ -30,6 +30,7 @@
 #else
 #include "core/core.h"
 #endif
+#include "units.h"  // NOLINT
 
 namespace bfs {
 
@@ -174,7 +175,7 @@ bool Ams5915::Read() {
                pres_range_mbar_ + min_pres_mbar_;
   temp_ = static_cast<float>(temp_cnts_ * 200) / 2048.0f - 50.0f;
   if (temp_ > MAX_TEMPERATURE_) {return false;}
-  pres_pa_ = pres_mbar_ * 100.0f;
+  pres_pa_ = convpres(pres_mbar_, PresUnit::MBAR, PresUnit::PA);
   temp_c_ = temp_;
   return true;
 }
