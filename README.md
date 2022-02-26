@@ -58,6 +58,8 @@ This library is within the namespace *bfs*.
 
 # Ams5915
 
+**Ams5915()** Default constructor, requires calling the Config method to setup the I2C bus, I2C address, and transducer type.
+
 **Ams5915(i2c_t3 &ast;bus, const uint8_t addr, const Transducer type)** Creates an Ams5915 object. A pointer to the I2C bus object is passed along with the I2C address of the sensor and the AMS-5915 transducer type. The enumerated transducer types are:
 
 | Sensor Name       | Enumerated Type  | Pressure Type              | Pressure Range       |
@@ -90,6 +92,8 @@ For example, the following code declares an AMS5915 object called *ams* with an 
 ```C++
 bfs::Ams5915 ams(&Wire, 0x10, bfs::Ams5915::AMS5915_1200_B);
 ```
+
+**void Config(TwoWire &ast;bus, const uint8_t addr, const Transducer type)** This is required when using the default constructor and sets up the I2C bus, I2C address, and transducer type.
 
 **bool Begin()** Initializes communication with the sensor and configures the sensor driver for the specified transducer. True is returned if communication is able to be established with the sensor and configuration completes successfully, otherwise, false is returned. The communication bus is not initialized within this library and must be initialized seperately; this enhances compatibility with other sensors that may on the same bus.
 

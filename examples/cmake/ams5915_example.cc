@@ -23,12 +23,9 @@
 #include "ams5915.h"
 
 /* 
-* An AMS5915 object, which is a
-* static pressure sensure at I2C
-* address of 0x12, on I2C bus 0,
-* and is a AMS5915-1200-B
+* An AMS5915 object
 */
-bfs::Ams5915 static_pres(&Wire, 0x12, bfs::Ams5915::AMS5915_1200_B);
+bfs::Ams5915 static_pres;
 
 int main() {
   /* Serial to display data */
@@ -36,6 +33,11 @@ int main() {
   while(!Serial){}
   Wire.begin();
   Wire.setClock(400000);
+  /* 
+  * I2C address of 0x12, on bus 0,
+  * and is a AMS5915-1200-B
+  */
+  static_pres.Config(&Wire, 0x12, bfs::Ams5915::AMS5915_1200_B);
   /* Starting communication with the static pressure transducer */
   if (!static_pres.Begin()) {
     Serial.println("Error communicating with sensor");
