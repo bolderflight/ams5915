@@ -23,8 +23,8 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef SRC_AMS5915_H_
-#define SRC_AMS5915_H_
+#ifndef AMS5915_SRC_AMS5915_H_  // NOLINT
+#define AMS5915_SRC_AMS5915_H_
 
 #if defined(ARDUINO)
 #include "Arduino.h"
@@ -59,8 +59,11 @@ class Ams5915 {
     AMS5915_0350_D_B,
     AMS5915_1000_D_B,
     AMS5915_1000_A,
-    AMS5915_1200_B};
+    AMS5915_1200_B
+  };
+  Ams5915() {}
   Ams5915(TwoWire *bus, const uint8_t addr, const Transducer type);
+  void Config(TwoWire *bus, const uint8_t addr, const Transducer type);
   bool Begin();
   bool Read();
   inline float pres_pa() const {return pres_pa_;}
@@ -89,4 +92,4 @@ class Ams5915 {
 
 }  // namespace bfs
 
-#endif  // SRC_AMS5915_H_
+#endif  // AMS5915_SRC_AMS5915_H_ NOLINT

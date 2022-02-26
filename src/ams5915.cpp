@@ -151,6 +151,123 @@ Ams5915::Ams5915(TwoWire *bus, const uint8_t addr, const Transducer type) {
   }
   pres_range_mbar_ = max_pres_mbar_ - min_pres_mbar_;
 }
+void Ams5915::Config(TwoWire *bus, const uint8_t addr, const Transducer type) {
+  bus_ = bus;
+  addr_ = addr;
+  switch (type) {
+    case AMS5915_0005_D: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 5.0f;
+      break;
+    }
+    case AMS5915_0010_D: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 10.0f;
+      break;
+    }
+    case AMS5915_0005_D_B: {
+      min_pres_mbar_ = -5.0f;
+      max_pres_mbar_ = 5.0f;
+      break;
+    }
+    case AMS5915_0010_D_B: {
+      min_pres_mbar_ = -10.0f;
+      max_pres_mbar_ = 10.0f;
+      break;
+    }
+    case AMS5915_0020_D: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 20.0f;
+      break;
+    }
+    case AMS5915_0050_D: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 50.0f;
+      break;
+    }
+    case AMS5915_0100_D: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 100.0f;
+      break;
+    }
+    case AMS5915_0020_D_B: {
+      min_pres_mbar_ = -20.0f;
+      max_pres_mbar_ = 20.0f;
+      break;
+    }
+    case AMS5915_0050_D_B: {
+      min_pres_mbar_ = -50.0f;
+      max_pres_mbar_ = 50.0f;
+      break;
+    }
+    case AMS5915_0100_D_B: {
+      min_pres_mbar_ = -100.0f;
+      max_pres_mbar_ = 100.0f;
+      break;
+    }
+    case AMS5915_0200_D: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 200.0f;
+      break;
+    }
+    case AMS5915_0350_D: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 350.0f;
+      break;
+    }
+    case AMS5915_1000_D: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 1000.0f;
+      break;
+    }
+    case AMS5915_2000_D: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 2000.0f;
+      break;
+    }
+    case AMS5915_4000_D: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 4000.0f;
+      break;
+    }
+    case AMS5915_7000_D: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 7000.0f;
+      break;
+    }
+    case AMS5915_10000_D: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 10000.0f;
+      break;
+    }
+    case AMS5915_0200_D_B: {
+      min_pres_mbar_ = -200.0f;
+      max_pres_mbar_ = 200.0f;
+      break;
+    }
+    case AMS5915_0350_D_B: {
+      min_pres_mbar_ = -350.0f;
+      max_pres_mbar_ = 350.0f;
+      break;
+    }
+    case AMS5915_1000_D_B: {
+      min_pres_mbar_ = -1000.0f;
+      max_pres_mbar_ = 1000.0f;
+      break;
+    }
+    case AMS5915_1000_A: {
+      min_pres_mbar_ = 0.0f;
+      max_pres_mbar_ = 1000.0f;
+      break;
+    }
+    case AMS5915_1200_B: {
+      min_pres_mbar_ = 700.0f;
+      max_pres_mbar_ = 1200.0f;
+      break;
+    }
+  }
+  pres_range_mbar_ = max_pres_mbar_ - min_pres_mbar_;
+}
 bool Ams5915::Begin() {
   /* Checking to see if we can communicate with sensor */
   for (int tries = 0; tries < MAX_TRIES_; tries++) {

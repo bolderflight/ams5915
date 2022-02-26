@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.1.0
+- Updated to have a default constructor and a Config method to configure the sensor
+
 ## v5.0.3
 - Updated to use the units library for mbar to Pa conversion
 
