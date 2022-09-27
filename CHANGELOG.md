@@ -1,5 +1,9 @@
 # Changelog
 
+## v6.0.0
+- Removed dependency on the Units library
+- Added CMake support for Teensy MMOD
+
 ## v5.1.0
 - Updated to have a default constructor and a Config method to configure the sensor
 

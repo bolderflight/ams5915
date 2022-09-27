@@ -1,4 +1,4 @@
-[![Pipeline](https://gitlab.com/bolderflight/software/ams5915/badges/main/pipeline.svg)](https://gitlab.com/bolderflight/software/ams5915/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![Bolder Flight Systems Logo](img/logo-words_75.png) &nbsp; &nbsp; ![Arduino Logo](img/arduino_logo_75.png)
 
@@ -18,13 +18,13 @@ This library communicates with the AMS 5915 sensors using an I2C interface. The 
 
 ## Arduino
 
-Simply clone or download and extract the zipped library into your Arduino/libraries folder. In addition, the [Bolder Flight Systems Units library](https://github.com/bolderflight/units) must be installed. The library is added as:
+Simply clone or download and extract the zipped library into your Arduino/libraries folder. The library is added as:
 
 ```C++
 #include "ams5915.h"
 ```
 
-An example Arduino executable is located in: *examples/arduino/ams5915_example/ams5915_example.ino*. Teensy 3.x, 4.x, and LC devices are used for testing under Arduino and this library should be compatible with other Arduino ARM devices. This library is **not** expected to work with AVR devices.
+An example Arduino executable is located in: *examples/arduino/ams5915_example/ams5915_example.ino*. Teensy 3.x, 4.x, and LC devices are used for testing under Arduino and this library should be compatible with other Arduino devices.
 
 ## CMake
 CMake is used to build this library, which is exported as a library target called *ams5915*. The header is added as:
@@ -48,6 +48,7 @@ This will build the library and an example executable called *ams5915_example*. 
    * MKL26Z64
    * IMXRT1062_T40
    * IMXRT1062_T41
+   * IMXRT1062_MMOD
 
 These are known to work with the same packages used in Teensy products. Also switching packages is known to work well, as long as it's only a package change.
 
