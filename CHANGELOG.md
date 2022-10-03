@@ -1,5 +1,8 @@
 # Changelog
 
+## v6.0.1
+- Updated core to support MMOD
+
 ## v6.0.0
 - Removed dependency on the Units library
 - Added CMake support for Teensy MMOD
